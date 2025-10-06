@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandearx Future</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --glass-bg-color: rgba(255, 255, 255, 0.08);
+            --glass-border-color: rgba(255, 255, 255, 0.15);
+            --glass-shadow-color: rgba(0, 0, 0, 0.25);
+            --text-light: #eee5c7;
+            --text-accent: #8eccff;
+            --primary-glow: #0044ff;
+            --secondary-glow: #3700ff;
+            --panel-bg: rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Global & Base Styles --- */
+    body {
+        margin: 0;
+        font-family: 'Share Tech Mono', monospace; /* Font coding/futuristik */
+        color: var(--text-light); 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        background-color: #0d0a1b; /* Warna fallback jika gambar gagal dimuat */
+    }
+
+    /* Futuristic Background Elements (Sekarang untuk gambar utama) */
+    body::before {
+        content: '';
+        position: fixed; /* Gunakan fixed agar gambar tetap saat scroll */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('DALL·E 2025-03-23 12.35.57 - A breathtaking realistic depiction of a lost city with ancient Babylonian-style ruins. The scene features towering ziggurats, crumbling stone walls, a.webp'); /* GANTI DENGAN URL GAMBAR ASLI ANDA */
+        background-size: cover; /* Pastikan gambar mencakup seluruh area */
+        background-position: center; /* Posisikan gambar di tengah */
+        background-repeat: no-repeat; /* Jangan ulangi gambar */
+        opacity: 0.6; /* Pertahankan opacity agar teks di atasnya tetap terlihat */
+        z-index: -1;  
+    } 
+    /* --- Glassmorphism Effect Base --- */
+    .glass-panel {
+        background: var(--glass-bg-color);
+        border: 1px solid var(--glass-border-color);
+        backdrop-filter: blur(10px); /* Efek blur utama */
+        -webkit-backdrop-filter: blur(10px); /* Untuk kompatibilitas Safari */
+        border-radius: 15px;
+        box-shadow: 0 8px 32px var(--glass-shadow-color);
+        padding: 20px;
+        margin: 20px;
+        text-align: center;
+        position: relative;
+    }
+
+        /* --- Header --- */
+        header {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            color: var(--text-accent);
+            text-shadow: 0 0 10px var(--primary-glow);
+            margin: 0;
+        }
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 1.1em;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        nav a:hover {
+            color: var(--text-accent);
+            text-shadow: 0 0 8px var(--secondary-glow);
+        }
+
+        /* --- Main Content / Coverflow Gallery --- */
+        main {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Agar main mengisi ruang yang tersedia */
+            z-index: 5;
+        }
+
+        .coverflow-container {
+            position: relative;
+            width: 100%;
+            height: 400px; /* Tinggi coverflow */
+            perspective: 1200px; /* Jarak pandang untuk efek 3D */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+	    margin-top: 50px;
+	    margin-bottom: 50px;
+        }
+
+        .coverflow-wrapper {
+            position: absolute;
+            width: 80%; /* Lebar relatif dari container */
+            height: 100%;
+            transform-style: preserve-3d; /* Penting untuk elemen 3D */
+            transition: transform 0.5s ease-in-out; /* Animasi perpindahan */
+        }
+
+        .coverflow-item {
+            position: absolute;
+            width: 250px; /* Lebar masing-masing item */
+            height: 350px; /* Tinggi masing-masing item */
+            background-color: var(--panel-bg);
+            border: 1px solid var(--glass-border-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px var(--glass-shadow-color);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            backface-visibility: hidden; /* Hindari flickering */
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Deskripsi di bawah */
+            align-items: center;
+        }
+
+        .coverflow-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .coverflow-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%; 
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.836) 0%, rgba(0, 0, 0, 0.836) 100%);
+            color: var(--text-light);
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 1;
+            padding: 5px;
+        }
+        .coverflow-item .overlay h3 {
+            margin: 5px 0 5px 0;
+            color: var(--text-accent);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1em;
+        }
+        .coverflow-item .overlay p { 
+            text-align: center;
+        }
+        /* --- Control Buttons (for Coverflow) --- */
+        .coverflow-controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        .coverflow-controls button {
+            background: var(--glass-bg-color);
+            border: 1px solid var(--glass-border-color);
+            backdrop-filter: blur(5px);
+            color: var(--text-accent);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background 0.3s, transform 0.3s, text-shadow 0.3s;
+            box-shadow: 0 4px 15px var(--glass-shadow-color);
+        }
+        .coverflow-controls button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            text-shadow: 0 0 5px var(--primary-glow);
+        }
+
+        /* --- About Section (Optional) --- */
+        .about-section {
+            width: 90%;
+            max-width: 800px;
+            margin-top: 80px;
+            padding: 30px;
+            text-align: center;
+            background: var(--glass-bg-color);
+            border: 1px solid var(--glass-border-color);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px var(--glass-shadow-color);
+        }
+        .about-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-accent);
+            text-shadow: 0 0 8px var(--secondary-glow);
+            margin-bottom: 20px;
+        }
+        .about-section p {
+            line-height: 1.7;
+            font-size: 1.1em;
+            max-width: 700px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0 auto 20px auto;
+        }
+        .about-section .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-glow);
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* --- Footer --- */
+        footer {
+            width: 100%;
+            padding: 20px;
+            margin-top: 50px;
+            text-align: center;
+            background: var(--panel-bg);
+            border-top: 1px solid var(--glass-border-color);
+            color: var(--muted);
+            font-size: 0.9em;
+            z-index: 10;
+        }
+        footer a {
+            color: var(--text-accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: var(--primary-glow);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+            .coverflow-container {
+                height: 300px;
+            }
+            .coverflow-item {
+                width: 200px;
+                height: 280px;
+            }
+            .coverflow-item .overlay h3 {
+                font-size: 1em;
+            }
+            .coverflow-item .overlay p {
+                font-size: 0.8em;
+            }
+            .about-section {
+                margin-top: 50px;
+                padding: 20px;
+            }
+            .about-section h2 {
+                font-size: 1.8em;
+            }
+            .about-section p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            header { padding: 10px; }
+            header h1 { font-size: 1.5em; }
+            nav a { margin: 0 5px; font-size: 0.9em; }
+            .coverflow-container { height: 250px; }
+            .coverflow-item { width: 200px; height: 250px; }
+            .coverflow-item .overlay { padding: 5px; }
+            .coverflow-item .overlay h3 { font-size: 0.9em; }
+            .about-section { margin-top: 30px; padding: 15px; }
+            .about-section h2 { font-size: 1.5em; }
+            .about-section p { font-size: 0.9em; }
+        }
+        /* --- Social Media Buttons Style --- */
+        .social-links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Jarak antar tombol */
+        }
+
+        .social-links a {
+            /* Bentuk dan Ukuran Tombol */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%; /* Membuat tombol bulat */
+            font-size: 1.5em; /* Ukuran Ikon */
+            
+            /* Glassmorphism Ringan */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border-color);
+            color: rgb(255, 255, 255); /* Warna Ikon */
+            
+            /* Transisi untuk Hover Effect */
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-links a:hover {
+            /* Efek Hover */
+            background: var(--primary-glow); /* Latar belakang berubah warna */
+            color: var(--background-color); /* Ikon berubah warna (ke warna gelap) */
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 0 15px var(--primary-glow); /* Tambahkan Glow halus */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="glass-panel">
+        <h1>Alexandearx // Wangsa Guna</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Connect</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="projects" class="coverflow-section">
+            <h2 class="glass-panel" 
+            style="font-family: 'Orbitron', sans-serif; color: var(--text-accent); text-shadow: 0 0 8px var(--secondary-glow);">My Projects</h2>
+            
+            <div class="coverflow-container">
+                <div class="coverflow-wrapper" id="coverflow-wrapper">
+                    <div class="coverflow-item" data-index="0" data-url="https://mrscaramanga.github.io/sudoku/">
+                        <img src="icon.png" alt="Dark Sudoku">
+                        <div class="overlay">
+                            <h3>Dark Sudoku</h3>
+                            <p>A web-based game with pure Vanilla JS logic</p>
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="1" data-url="https://mrscaramanga.github.io/100-tables/">
+                        <img src="100tables.png" alt="100 Tables">
+                        <div class="overlay">
+                            <h3>100 Tables</h3>
+                            <p>First Android APK for multiplication quiz</p>
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="2" data-url="https://mrscaramanga.github.io/semaphore-challenge/">
+                        <img src="semaphorechallenge.jpg" alt="Semaphore">
+                        <div class="overlay">
+                            <h3>Semaphore</h3>
+                            <p>Android APK for Semaphore communication protocol</p>
+                        </div>
+                    </div>
+                    <div class="coverflow-item" data-index="3">
+                        <img src="idiomcards.jpg" alt="Idiom Cards">
+                        <div class="overlay">
+                            <h3>Idiom Cards</h3>
+                            <p>Android APK developed for a Highschool</p>
+                        </div>
+                    </div>
+                     <div class="coverflow-item" data-index="4" data-url="https://mitrahidayahgemilang.blogspot.com/">
+                        <img src="iconrental.jpg" alt="Car Rental">
+                        <div class="overlay">
+                            <h3>Cv MHG</h3>
+                            <p>Promotional website for a Car Rental company</p>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            
+            <div class="coverflow-controls">
+                <button id="prevBtn"> &lt; Previous</button>
+                <button id="nextBtn">Next &gt; </button>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>About Alexandearx</h2>
+            <img src="favicon.png" 
+            alt="Profile Picture" class="profile-pic">
+            <p>
+                If I'm not solving puzzles, I'm building them.<br>
+                My primary obsession is Sudoku, a lifelong passion that organically became the foundation of my development skills.<br>
+                My current focus is on crafting clean, interactive, and well-structured Front-End interfaces (primarily HTML/CSS/JS).
+            </p> 
+        </section>
+
+        <section id="contact" class="glass-panel social-panel" style="margin-top: 80px; padding-bottom: 40px;">
+    <h2>Connect with Me</h2> 
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/topsudokusolver" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        
+        <a href="https://t.me/sudokusolver" target="_blank" title="Telegram">
+            <i class="fab fa-telegram-plane"></i>
+        </a>
+
+        <a href="https://open.spotify.com/user/pm3cpwdic6c2s3thp46g288ik?si=11ec49855ec348b6" target="_blank" title="Spotify">
+            <i class="fab fa-spotify"></i>
+        </a>
+        
+        <a href="https://linktr.ee/wangsaguna" target="_blank" title="Linktree">
+           <i class="fa-solid fa-link"></i>
+        </a>
+        <a href="https://mysteriousfile88.wordpress.com" target="_blank" title="WordPress">
+            <i class="fab fa-wordpress"></i>
+        </a>
+
+        <a href="https://filewangsaguna.blogspot.com" target="_blank" title="Mytery Files">
+            <i class="fa-solid fa-puzzle-piece"></i>
+        </a>
+
+        <a href="https://alexandearx.blogspot.com" target="_blank" title="Ancient Story">
+            <i class="fa-solid fa-book-quran"></i>
+        </a>
+    </div>
+ 
+</section>
+    </main>
+
+    <footer>
+        &copy; 2025 Alexandearx. All rights reserved.
+    </footer>
+
+    <script>
+        // --- JavaScript untuk Fungsionalitas Coverflow 3D ---
+        const coverflowWrapper = document.getElementById('coverflow-wrapper');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const items = document.querySelectorAll('.coverflow-item');
+        const numItems = items.length;
+        let currentIndex = 0;
+
+        function updateCoverflow() {
+            const angle = 45; // Sudut rotasi item di samping
+            const translateZ = -200; // Translasi Z untuk efek 3D
+            const translateXOffset = 280; // Jarak horizontal antar item
+
+            items.forEach((item, i) => {
+                let transform = '';
+                let opacity = 1;
+                let zIndex = 0;
+
+                if (i === currentIndex) {
+                    // Item tengah
+                    transform = `translateX(0) rotateY(0deg) translateZ(0)`;
+                    zIndex = 10;
+                    opacity = 1;
+                } else if (i < currentIndex) {
+                    // Item di kiri
+                    transform = `translateX(-${translateXOffset * (currentIndex - i)}px) rotateY(${angle}deg) translateZ(${translateZ}px)`;
+                    zIndex = 10 - (currentIndex - i);
+                    opacity = 0.7 - (currentIndex - i) * 0.1;
+                } else {
+                    // Item di kanan
+                    transform = `translateX(${translateXOffset * (i - currentIndex)}px) rotateY(-${angle}deg) translateZ(${translateZ}px)`;
+                    zIndex = 10 - (i - currentIndex);
+                    opacity = 0.7 - (i - currentIndex) * 0.1;
+                }
+
+                item.style.transform = transform;
+                item.style.opacity = opacity;
+                item.style.zIndex = zIndex;
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : numItems - 1;
+            updateCoverflow();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex < numItems - 1) ? currentIndex + 1 : 0;
+            updateCoverflow();
+        });
+
+        // Inisialisasi coverflow
+        updateCoverflow();
+
+        // Optional: Auto-rotate coverflow
+        let autoRotateInterval;
+        function startAutoRotate() {
+            autoRotateInterval = setInterval(() => {
+                nextBtn.click();
+            }, 5000); // Ganti gambar setiap 5 detik
+        }
+        function stopAutoRotate() {
+            clearInterval(autoRotateInterval);
+        }
+ 
+        // Jika Anda ingin elemen coverflow bisa diklik untuk pindah ke tengah atau buka link
+        items.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                // Cek: Apakah item yang diklik sudah berada di tengah?
+                if (index === currentIndex) {
+                    // Ya, Item sudah di tengah. Buka Link Proyek.
+                    const projectUrl = item.getAttribute('data-url');
+                    if (projectUrl) {
+                        // Buka link di tab baru
+                        window.open(projectUrl, '_blank'); 
+                    }
+                } else {
+                    // Belum di tengah. Pindahkan item ini ke tengah.
+                    currentIndex = index;
+                    updateCoverflow();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

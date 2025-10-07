@@ -37,7 +37,7 @@
     /* Futuristic Background Elements (Sekarang untuk gambar utama) */
     body::before {
         content: '';
-        position: fixed; /* Gunakan fixed agar gambar tetap saat scroll */
+        position: fixed;  
         top: 0;
         left: 0;
         width: 100%;
@@ -257,6 +257,9 @@
 
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
+			body::before{
+				position: absolute; 
+			}
             header {
                 flex-direction: column;
                 gap: 15px;
@@ -269,7 +272,7 @@
             }
             .coverflow-container {
                 height: 300px;
-                width: 25%;
+                width: 250px;
             }
             .coverflow-item {
                 width: 200px;
@@ -295,10 +298,11 @@
 
         @media (max-width: 480px) {
             body { padding: 10px; }
+			body::before{ position: absolute; }
             header { padding: 10px; }
             header h1 { font-size: 1.5em; }
             nav a { margin: 0 5px; font-size: 0.9em; }
-            .coverflow-container { height: 250px; width: 25%;}
+            .coverflow-container { height: 250px; width: 250px;}
             .coverflow-item { width: 200px; height: 250px; }
             .coverflow-item .overlay { padding: 5px; }
             .coverflow-item .overlay h3 { font-size: 0.9em; }
@@ -546,6 +550,7 @@
 </body>
 
 </html>
+
 
 
 

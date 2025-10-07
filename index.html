@@ -34,7 +34,7 @@
         background-color: #0d0a1b; /* Warna fallback jika gambar gagal dimuat */
     }
 
-    /* Futuristic Background Elements (Sekarang untuk gambar utama) */
+    /* Gothic Background Elements (Sekarang untuk gambar utama) */
     body::before {
         content: '';
         position: fixed;  
@@ -485,9 +485,9 @@
 		  // Tambahkan deteksi mobile di sini:
     		const isMobile = window.innerWidth <= 768; 
             items.forEach((item, i) => {
-        let transform = '';
-        let opacity = 1;
-        let zIndex = 0;
+        	let transform = '';
+        	let opacity = 1;
+        	let zIndex = 0;
 
         if (i === currentIndex) {
             // Item tengah
@@ -553,7 +553,7 @@ window.addEventListener('resize', updateCoverflow);
             clearInterval(autoRotateInterval);
         }
  
-        // Jika Anda ingin elemen coverflow bisa diklik untuk pindah ke tengah atau buka link
+        // Elemen coverflow bisa diklik untuk pindah ke tengah atau buka link
         items.forEach((item, index) => {
             item.addEventListener('click', () => {
                 // Cek: Apakah item yang diklik sudah berada di tengah?
@@ -575,4 +575,5 @@ window.addEventListener('resize', updateCoverflow);
     </script>
 </body>
 </html>
+
 

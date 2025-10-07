@@ -466,7 +466,9 @@
         function updateCoverflow() {
             const angle = 45; // Sudut rotasi item di samping
             const translateZ = -200; // Translasi Z untuk efek 3D
-            const translateXOffset = 280; // Jarak horizontal antar item
+           // const translateXOffset = 280; // Jarak horizontal antar item
+            const itemWidth = items[0].offsetWidth;
+            const translateXOffset = itemWidth * 1.3;
 
             items.forEach((item, i) => {
                 let transform = '';
@@ -543,6 +545,7 @@
 </body>
 
 </html>
+
 
 
 

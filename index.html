@@ -55,21 +55,24 @@
             padding: 20px;
             margin: 20px auto;
             text-align: center;
-        }
+        } 
+        /*.about-section {width: 90%; max-width: 800px; margin: 50px auto; padding: 30px; text-align: center; background: var(--glass-bg-color); gap: 5px;
+            border: 1px solid var(--glass-border-color); border-radius: 15px;}*/
+        .profile-pic { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--primary-glow); margin-bottom: 20px; }
 
         header { 
             width: 90%;
             max-width: 1200px;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: left;
+            align-items: left;
             z-index: 10;
             gap: 5px;
             flex-direction: column;
         }
         header h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2em;
+            font-size: 1em;
             color: var(--text-accent); 
             text-shadow: 0 0 10px var(--primary-glow);
         }
@@ -153,13 +156,7 @@
         /*.nav-btn {background: var(--glass-bg-color);border: 1px solid var(--glass-border-color);color: var(--text-accent);padding: 10px 20px;border-radius: 5px;cursor: pointer;font-family: 'Orbitron', sans-serif;transition: 0.3s;}
         .nav-btn:hover { background: var(--primary-glow); color: white; }*/
         /* --- About & Social --- */
-        .about-section {
-            width: 90%; max-width: 800px; margin: 50px auto; padding: 30px;
-            text-align: center; background: var(--glass-bg-color); gap: 5px;
-            border: 1px solid var(--glass-border-color); border-radius: 15px; 
-        }
-        .profile-pic { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--primary-glow); margin-bottom: 20px; }
-
+       
         .social-links { display: flex; justify-content: center; gap: 5px;}
         .social-links a {
             width: 40px; height: 40px; border-radius: 50%;
@@ -180,17 +177,14 @@
 </head>
 <body>
 
-    <header class="about-section">
-        <h1>Alexandearx // Wangsa Guna</h1> 
-        <h2>About Alexandearx</h2>
+    <header class="glass-panel">    
             <img src="https://ugc.production.linktr.ee/cc7ac80e-b4f4-43ca-a32b-b40673231b1a_cold....png?io=true&size=avatar-v3_0" 
-            alt="Profile Picture" class="profile-pic">
+            alt="Profile Picture" class="profile-pic"> <h1>Alexandearx Wangsa Guna</h1>     
             <p>Sudoku enthusiast applying logic and strategy to build clean interfaces with HTML, CSS, and JS.</p> 
         <!--Males pake beginian wkwk nav><a href="#about">About</a><a href="#projects">Project</a><a href="#contact">Connect</a></nav  
-        langsung aja kayak profile aduh bosen banget gua liat profile sendiri 😒--> 
-        <!--section id="about" class="about-section">
-                </section>
-            <!--malesin banget sih, pendekin aja 🙄. I live by a duality: when I'm not solving puzzles, I'm building them. This focus is honed both on-screen and off. My lifelong passion for Sudoku organically formed the analytical foundation of my development skills, demanding precision and strategy. In parallel, my pursuit of Martial Arts instills the discipline, quick thinking, and focus required to craft clean, interactive, and robust Front-End interfaces (primarily HTML/CSS/JS). -->
+        langsung aja kayak profile aduh bosen banget gua liat profile sendiri 😒> 
+        <section id="about" class="about-section"><h2>About Alexandearx</h2> </section>
+        <malesin banget sih, pendekin aja 🙄. I live by a duality: when I'm not solving puzzles, I'm building them. This focus is honed both on-screen and off. My lifelong passion for Sudoku organically formed the analytical foundation of my development skills, demanding precision and strategy. In parallel, my pursuit of Martial Arts instills the discipline, quick thinking, and focus required to craft clean, interactive, and robust Front-End interfaces (primarily HTML/CSS/JS). -->
     </header>
 
     <main style="width: 100%; display: flex; flex-direction: column; align-items: center;">

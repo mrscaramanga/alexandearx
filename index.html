@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
+    <style> /*style 2026, gw males style yg kemaren risih banget 😒 lembek bukan gw banget, plus gw lagi bosen banget hari ini |30-4-2026|*/
         :root {
             --glass-bg-color: rgba(255, 255, 255, 0.08);
             --glass-border-color: rgba(255, 255, 255, 0.15);
@@ -18,9 +18,7 @@
             --secondary-glow: #3700ff;
             --panel-bg: rgba(0, 0, 0, 0.4);
         }
-
         * { box-sizing: border-box; }
-
         body {
             margin: 0;
             font-family: 'Share Tech Mono', monospace;
@@ -32,7 +30,6 @@
             background: radial-gradient(circle at center, #1a1a2e 0%, #0d0d15 100%);
             position: relative;
         }
-
         body::before {
             content: '';
             position: fixed; 
@@ -43,7 +40,6 @@
             opacity: 0.1;
             z-index: -1; 
         }
-
         .glass-panel {
             background: var(--glass-bg-color);
             border: 1px solid var(--glass-border-color);
@@ -52,7 +48,6 @@
             box-shadow: 0 8px 32px var(--glass-shadow-color);
             padding: 20px;
         }
- 
         header.profile-container {
             width: 90%;
             max-width: 1000px;
@@ -61,20 +56,17 @@
             flex-direction: column;
             text-align: left;
         }
-
         .profile-top {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-
         .profile-pic {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             border: 3px solid var(--primary-glow);
         }
-
         header h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5em;
@@ -82,7 +74,6 @@
             text-shadow: 0 0 10px var(--primary-glow);
             margin: 0;
         }
-
         .bio {
             margin-top: 15px;
             max-width: 840px;
@@ -90,7 +81,6 @@
             align-text: center;
             font-size: 1em;
         }
- 
         main.content-grid {
             width: 90%;
             max-width: 1000px;
@@ -99,18 +89,13 @@
             gap: 20px;
             margin-bottom: 40px;
         }
- 
-        #projects {
-            text-align: left;
-        }
-
+        #projects { text-align: left; }
         #projects h2, #contact h2 {
             font-family: 'Orbitron', sans-serif;
             color: var(--text-accent);
             font-size: 1.2em;
             margin-top: 0;
         }
-
         .gallery-wrapper {
             display: flex;
             gap: 15px;
@@ -118,7 +103,6 @@
             padding: 10px;
             scrollbar-width: thin;
         }
-
         .project-card {
             flex: 0 0 180px;  
             background: var(--panel-bg);
@@ -128,29 +112,17 @@
             transition: 0.3s;
             cursor: pointer;
         }
-
-        .project-card:hover {
-            transform: scale(1.05);
-            border-color: var(--text-accent);
-        }
-
-        .project-card img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-        }
-
+        .project-card:hover { transform: scale(1.05); border-color: var(--text-accent); }
+        .project-card img { width: 100%; height: 100px; object-fit: cover; }
         .card-content { padding: 8px; text-align: center; }
         .card-content h3 { font-size: 0.9em; margin: 5px 0; font-family: 'Orbitron', sans-serif; }
         .card-content p { font-size: 0.7em; opacity: 0.8; margin: 0; }
- 
         .social-links {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
             justify-content: flex-start;
         }
-
         .social-links a {
             width: 60px; height: 60px;
             border-radius: 50%; font-size: 1.7em;
@@ -159,15 +131,9 @@
             border: 1px solid var(--glass-border-color);
             color: white; text-decoration: none; transition: 0.3s;
         }
-
-        .social-links a:hover {
-            background: var(--primary-glow);
-            transform: translateY(-3px);
-        }
-
+        .social-links a:hover { background: var(--primary-glow); transform: translateY(-3px); }
         footer { margin-top: auto; padding: 20px; opacity: 0.6; width: 100%; text-align: center; }
-
-        /* Responsive */
+        /*responsive*/
         @media (max-width: 768px) {
             main.content-grid { grid-template-columns: 1fr; }
             .profile-top { flex-direction: row; }
@@ -175,41 +141,29 @@
     </style>
 </head>
 <body>
-        <!-- bagian profil -->
+        <!--bagian profil-->
     <header class="profile-container glass-panel">
-        <div class="profile-top">
-            <img src="https://ugc.production.linktr.ee/cc7ac80e-b4f4-43ca-a32b-b40673231b1a_cold....png?io=true&size=avatar-v3_0" 
-                 alt="Profile" class="profile-pic">
-            <h1>Alexandearx Wangsa Guna</h1>
-        </div>
-        <div class="bio">
-            <p>Sudoku enthusiast applying logic and strategy to build clean interfaces with HTML, CSS, and JS.</p>
-        </div>
+        <div class="profile-top"><img src="https://ugc.production.linktr.ee/cc7ac80e-b4f4-43ca-a32b-b40673231b1a_cold....png?io=true&size=avatar-v3_0" 
+                 alt="Profile" class="profile-pic"><h1>Alexandearx Wangsa Guna</h1></div>
+        <div class="bio"><p>Sudoku enthusiast applying logic and strategy to build clean interfaces with HTML, CSS, and JS.</p></div>
     </header>
-
     <main class="content-grid">
-        <!-- bagian projek -->
+        <!--bagian projek-->
         <section id="projects" class="glass-panel">
             <h2>Project</h2>
             <div class="gallery-wrapper">
                 <div class="project-card" onclick="window.open('https://mrscaramanga.github.io/sudoku/', '_blank')">
                     <img src="icon.png" alt="Dark Sudoku">
                     <div class="card-content">
-                        <h3>Dark Sudoku</h3>
-                        <p>Vanilla JS Logic</p>
-                    </div>
+                        <h3>Dark Sudoku</h3><p>Vanilla JS Logic</p></div>
                 </div>
                 <div class="project-card" onclick="window.open('https://mrscaramanga.github.io/idiomcards/', '_blank')">
                     <img src="idiomcards.jpg" alt="Idiom Cards">
-                    <div class="card-content">
-                        <h3>Idiom Cards</h3>
-                        <p>Educational APK</p>
-                    </div>
+                    <div class="card-content"><h3>Idiom Cards</h3><p>Educational APK</p></div>
                 </div>
             </div>
         </section>
-
-        <!-- bagian social -->
+        <!--bagian social-->
         <section id="contact" class="glass-panel">
             <h2>Connect</h2>
             <div class="social-links">
@@ -223,8 +177,6 @@
             </div>
         </section>
     </main>
-
     <footer>&copy; 2026 Alexandearx. CV MHG.</footer>
-
 </body>
 </html>

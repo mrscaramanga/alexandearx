@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandearx Wangsa Guna</title> 
+    <link rel="icon" type="image/x-icon" href="https://ugc.production.linktr.ee/cc7ac80e-b4f4-43ca-a32b-b40673231b1a_cold....png?io=true&size=avatar-v3_0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0B132B;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            padding: 40px 20px 60px 20px;  
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px; 
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 2px;
+        }
+
+        h1 {
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: 500;    
+            color: #FFDB58;    
+            margin-bottom: 6px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+ 
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 12px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            color: #0f172a;
+            background-color: #FFDB58;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+ 
+        .links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        @media (min-width: 480px) {
+            .links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .link-btn {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            padding: 14px 20px;
+            background-color: #1e293b;
+            color: #f8fafc;
+            text-decoration: none;  
+            font-weight: 400;
+            font-size: 0.95rem;
+            border-radius: 5px;
+            border: 1px solid #334155;
+            transition: all 0.2s ease;
+        }
+
+        .link-btn i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .link-btn:hover {
+            background-color: #FFDB58;
+            color: #0f172a; 
+            transform: translateY(-2px);
+        }
+ 
+        .read-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        details {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        summary {
+            padding: 14px 18px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #f8fafc;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '\f107';  
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.2s ease;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #334155;
+            color: #FFDB58;
+        }
+
+        .read-body {
+            padding: 14px 18px;
+            color: #cbd5e1;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://ugc.production.linktr.ee/c257841a-31e8-489f-90ad-7d2437a583b3_yellow-flower-by-alexandearx.jpeg?io=true&size=avatar-v3_0" alt="Profile" class="profile-img">
+        <h2>R Al Fath</h2>
+        <h1>@alexandearx</h1>
+        <p>sudoku solver 🖊 random thoughts ⚓ wangsa guna</p>      
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('links')"><i class="fa-solid fa-link"></i> Links</button>
+            <button class="tab-btn" onclick="switchTab('read')"><i class="fa-solid fa-book-open"></i> Read</button>
+        </div>
+        <div id="links-tab" class="tab-content active">
+            <div class="links">
+                <a href="http://filewangsaguna.blogspot.com/" target="_blank" class="link-btn"><i class="fa-brands fa-blogger"></i> Pengelana Misteri</a>
+                <a href="https://mysteriousfile88.wordpress.com/" target="_blank" class="link-btn"><i class="fa-brands fa-wordpress"></i> Mysterious File 88</a>
+                <a href="https://mitrahidayahgemilang.netlify.app/" target="_blank" class="link-btn"><i class="fa-solid fa-car-on"></i> CV MHG</a>
+                <a href="https://filewangsaguna.blogspot.com/p/perkalian.html" target="_blank" class="link-btn"><i class="fa-solid fa-square-xmark"></i> Play Quiz</a>
+                <a href="https://t.me/alexandearx" target="_blank" class="link-btn"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                <a href="https://open.spotify.com/user/pm3cpwdic6c2s3thp46g288ik?si=726d43cd86d34c76" target="_blank" class="link-btn"><i class="fa-brands fa-spotify"></i> Spotify</a>
+            </div>
+        </div>
+        <div id="read-tab" class="tab-content">
+            <div class="read-list">
+                <details>
+                    <summary>What motivates you?</summary>
+                    <div class="read-body">
+                        <p>The motivation can be very abstract (the “need” to go sailing on a warm and breezy summer afternoon), but it can also be quite concrete (the need to go to the bathroom when your bladder is full). Motivation can be thought of as a driving force on behavior. Motivated behavior is a behavior that is incited to achieve a goal.<br><br>Dopamine plays a key role in motivation by acting as a chemical messenger in the brain that influences reward-seeking behavior. When you anticipate a reward or achieve a goal, dopamine levels increase, which reinforces the behavior and encourages you to pursue similar goals in the future. It’s not just about pleasure, dopamine is more about driving you to take action and stay motivated, especially when it comes to pursuing goals or tasks that lead to positive outcomes. In essence, dopamine helps to maintain focus and effort, even when challenges arise.<br><br>The hypothalamus also plays a key role in motivating animals to find food, drink, and sex in response to their needs.<br><br>You are cold, dehydrated, and depleted of energy. The appropriate humoral and visceromotor responses kick in automatically. You shiver, blood is shunted away from the body surface, urine production is inhibited, body fat reserves are mobilized, and so on. But the fastest and most effective way to correct these disturbances of brain homeostasis is to actively seek or generate warmth by moving, to drink water, and to eat. These are examples of motivated behaviors generated by the somatic motor system, and they are incited to occur by the activity of the lateral hypothalamus.<br><br>From: Neuroscience Exploring The Brain&nbsp;</p>
+                    </div>
+                </details>
+                <details>
+                    <summary>Avicenna's Wisdom on Health and Malady</summary>
+                    <div class="read-body">
+                        <p>My favorite one from a book: <strong>Avicenna</strong>.<br><br><strong>Avicenna (Ibn Sina)</strong>. Born at the end of the tenth century in what is now modern day Uzbekistan, Avicenna became a profound influence not only on Islamic thinking but also on that of Jews (such as Maimonides) and Christians (such as Thomas Aquinas). If a great thinker is one whose thought can be assimilated and developed by people of very different intellectual traditions, then Avicenna was, without doubt, <strong>a great thinker</strong>.<br><br><em>Ex nihilo nihilo fit</em>. <strong>Nothing comes from nothing</strong>, and Avicenna and his philosophy are no exception. Indeed, multiple influences were at work in the formation of his thought. This phrase is often associated with ancient Greek philosopher <strong>Parmenides</strong>. Parmenides argued that something cannot come from nothing and that change is an illusion, emphasizing the idea that existence is continuous and unchanging. This concept was also discussed by later philosophers, including <strong>Aristotle</strong>, who examined it in the context of his own metaphysical theories, although he did not use the exact phrase. <br><br>Avicenna demonstrated remarkable intellectual abilities from a very young age. By the age of 10, he had memorized the Qur'an and was already studying various subjects, including grammar, literature, and logic. He received his early <strong>education </strong>from his father and local teachers, who provided him with a strong foundation in various disciplines. Avicenna’s keen interest in medicine became evident early on, and by the age of 16, he was proficient enough to practice medicine and treat patients. His early exposure to Greek philosophical texts, particularly those of Aristotle, played a crucial role in shaping his future contributions to philosophy and science. His extensive studies and rapid mastery of diverse fields laid the groundwork for his later influential works, including the "Canon of Medicine" and "The Book of Healing."<br><br><strong>In this post</strong>, I want to note his insight on health and malady from page 237-238. Avicenna concludes his general comments on the causes of health and malady by identifying the six most important ones that the patient should consider in preserving his or her health, or the physician must take into account in returning the patient to a state of health. These are:<br>1) the ambient air,<br>2) the food and drink one takes in,<br>3) proper physical activity and rest,<br>4) psychological activities,<br>5) getting enough sleep as well as not sleeping too much, and finally<br>6) evacuation and retention.<br><br>These last six factors are what later Galenists would term the “non naturals,” all of which affect a human’s temperament by moderating or altering in some way the primary qualities of hot, cold, wet, and dry. Thus, when one breathes in air, it cools the humors in the heart, and consequently, if the ambient air is excessively cold or hot, it may reduce the natural hot quality of the vital spirits too much or not enough. Moreover, the air might be excessively moist and dry, thus affecting one’s temperamental balance.<br><br><strong>Physical activity</strong> or resting from physical activity clearly increases the vital heat that is the hallmark of life, but, ironically, this same vital heat breaks down the body and ultimately leads to its corruption, making an adequate amount of rest, which ultimately cools the body, also necessary. Sleep and wakefulness, which closely resemble rest and physical activity, also affect the body’s level of hot or cold: sleep cooling the body, wakefulness heating it.<br><br><strong>Psychological activity</strong> can also influence one’s temperament, argues Avicenna, particularly when the psychological activity involves remembering some past incidence or imaging some future one, especially when these mental images precipitate some emotional state. Thus, one might remember some particularly embarrassing or acrimonious event in one’s life and feel flushed or hot under the collar, or imagine some frightening scenario such that one’s “blood runs cold.”<br><br><strong>Food and drink</strong>, Avicenna observes, might have some initial effect when they are first taken in while having an opposite (or at least a different) effect once fully digested. So, for example, wine, in as much as it is a liquid, initially cools one who drinks it, but once it becomes digested it actually heats the blood, at least according the pharmacological theory at Avicenna’s time. Finally, proper retention followed by evacuation ensures that food and drugs that are ingested remain in the body long enough to be fully and properly digested so that the aliment can perform its function as well as seeing that waste material does not adversely affect the flow of the humors and functioning of the organs.<br><br><strong>In general</strong>, today we do not recognize the underlying causal explanations that ancient and medieval physicians associated with the various necessary factors or causes of health and disease. Despite that, one can still appreciate the overall goal (and frequently the efficacy) of these factors or causes in maintaining health. Indeed, living in a healthy climate, getting proper amounts of sleep, accompanied by a regimen of exercise and a well-balanced diet, as well as positive thinking and the like, are considered even today some of the most important factors in a healthy and well-balanced life.</p>
+                    </div>
+                </details>
+                <details>
+                    <summary>A Decade in Mystery</summary>
+                    <div class="read-body"> 
+                    <p><em>For my 10-year blogging anniversary: 14 August 2016</em></p>
+                    <p>Ten winters trapped in a screen of blue,<br>Where forgotten ink bleeds into digital dust.<br>I sang to a void that never knew,<br>Feeding a phantom with patience and rust.</p>
+                    <p>A graveyard of thoughts where time decay,<br>Yet the quiet keys still whisper my name.<br>Ten years lost in a slow portray,<br>An endless song to an absent flame.</p>
+                    </div>
+                </details>
+                <details>
+                    <summary>Endless Hours Between Earth and Stars</summary>
+                    <div class="read-body"> 
+                    <p><b>If you didn't need sleep, what would you do with all the extra time?</b></p>
+                    <p>If sleep were lost to endless skies<br>I’d walk where earth and starlight rise<br>I’d touch the moon, and feel its glow<br>And trace the stars where secrets flow</p>
+                    <p>Among the trees, I’d softly tread<br>With leaves that whisper things unsaid<br>I’d climb the peaks, where winds are free<br>And drink the air, so wild and free</p>
+                    <p>Beneath the sun, on rolling hills<br>I’d watch the quiet river spill<br>In endless time, I’d watch the sky<br>As comets race, and eagles fly</p>
+                    <p>With each new dawn, I’d wander wide<br>And listen to the ocean’s tide<br>In galaxies, I’d find my place<br>Where stars align in endless grace</p>
+                    </div>
+                </details>
+                <details>
+                    <summary>The Pursuit of Dreams</summary>
+                    <div class="read-body">  
+                    <p>In the race of life, each soul seeks a spark,<br />Chasing shadows of desires, igniting the dark.<br />They long for visions painted in their minds,<br />Striving for the treasures that true joy finds.</p>
+                    <p>With plans laid bare and failures entwined,<br />Some surrender to the weight they can't bind.<br />Others reach heights, their dreams now in sight,<br />While some drift in apathy, lost in the night.</p>
+                    <p>But in this chase, a question lingers true:<br />Do your dreams, in return, yearn for you?<br />Sometimes you grasp what your heart has confessed,<br />Other times, you find what brings only unrest.</p>
+                    <p>And there are moments when clarity's lost,<br />When desires elude, and you ponder the cost.<br />In the dance of ambition, amidst joy and strife,<br />We seek what we crave, the essence of life.</p> 
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+	document.querySelectorAll('.read-body').forEach(body => {
+            body.addEventListener('click', function() {
+                this.parentElement.removeAttribute('open');
+            });
+        });
+    </script>
+</body>
+</html>

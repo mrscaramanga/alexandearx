@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Retro Games For Fun</title>
+  <link rel="icon" type="image/x-icon" href="https://ugc.production.linktr.ee/cc7ac80e-b4f4-43ca-a32b-b40673231b1a_cold....png?io=true&size=avatar-v3_0">  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    :root {
+      --k-green: #00ff66;
+      --k-green-dim: #008833;
+      --k-bg: #0a0a0a;
+      --k-red: #ff3333;
+      --k-blue: #00e5ff;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--k-bg);
+      color: var(--k-green);
+      font-family: 'Press Start 2P', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 10px;
+    }
+ 
+    .arcade-card {
+      width: 100%;
+      max-width: 360px;
+      padding: 20px 16px;
+      background: var(--k-bg);
+      border: 2px solid var(--k-green);
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
+      text-align: center;
+      position: relative;
+    }
+    h1.main-title {
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.4;
+      text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+    }
+    .retro-btn {
+      width: 100%;
+      background-color: transparent;
+      color: var(--k-green);
+      border: 2px solid var(--k-green);
+      padding: 12px 10px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      outline: none;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .retro-btn:hover {
+      background-color: var(--k-green);
+      color: #000;
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+    }
+    .btn-back {
+      font-size: 9px;
+      padding: 8px;
+      border-color: #555;
+      color: #aaa;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+    .btn-back:hover {
+      background-color: #aaa;
+      color: #000;
+      box-shadow: none;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+ 
+    .ttt-status {
+      font-size: 10px;
+      margin-bottom: 15px;
+      min-height: 20px;
+      line-height: 1.4;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    .cell {
+      aspect-ratio: 1;
+      background-color: #111;
+      border: 2px solid var(--k-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px; 
+      cursor: pointer;
+      user-select: none;
+    }
+    .cell:hover {
+      background-color: #1a2e1f;
+    }
+    .cell.x {
+      color: var(--k-green);
+      text-shadow: 0 0 2px var(--k-green);
+    }
+    .cell.o {
+      color: var(--k-blue);
+      text-shadow: 0 0 2px var(--k-blue);
+    }
+
+    .skor-box {
+      font-size: 10px;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .soal {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+    }
+    .opsi-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 16px;
+    }
+    .feedback {
+      margin-top: 12px;
+      font-size: 9px;
+      min-height: 18px;
+      line-height: 1.4;
+    }
+    .tepat { color: var(--k-green); }
+    .salah { color: var(--k-red); }
+
+    #shooterCanvas {
+      border: 2px solid var(--k-green);
+      background: #111;
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+      cursor: crosshair;
+      display: block;
+      margin: 0 auto 10px auto;
+      touch-action: none;  
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body> 
+  <div class="arcade-card">
+    <div id="menu-section" class="section active">
+      <h1 class="main-title">SELECT GAME</h1>
+      <button class="retro-btn" onclick="showSection('ttt-section')">TIC TAC TOE</button>
+      <button class="retro-btn" onclick="showSection('quiz-section')">MATH QUIZ</button>
+      <button class="retro-btn" onclick="showSection('shooter-section')">SPACE SHOOTER</button>
+    </div> 
+ 
+    <div id="ttt-section" class="section">
+      <h1 class="main-title">TIC TAC TOE</h1>
+      <div class="ttt-status" id="ttt-status">TURN: <span style="color: var(--k-green);">X</span></div>
+      <div class="board" id="board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+      </div>
+      <button class="retro-btn" id="resetBtn">RESET</button>
+      <button class="retro-btn btn-back" onclick="showSection('menu-section')">&lt; MENU</button>
+    </div>
+ 
+    <div id="quiz-section" class="section">
+      <h1 class="main-title">MATH QUIZ</h1>
+      <div class="skor-box">Streak: <span id="skor">0</span></div>
+      <div class="soal" id="box-soal">0 x 0</div>     
+      <div class="opsi-container" id="opsi-container">
+        <button class="retro-btn btn-opsi" data-nilai="0">0</button>
+        <button class="retro-btn btn-opsi" data-nilai="0">0</button>
+        <button class="retro-btn btn-opsi" data-nilai="0">0</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <button class="retro-btn btn-back" onclick="showSection('menu-section')">&lt; MENU</button>
+    </div>
+ 
+    <div id="shooter-section" class="section">
+      <h1 class="main-title">SPACE SHOOTER</h1>
+      <div class="skor-box">SCORE: <span id="shooter-score">0</span></div>
+      <canvas id="shooterCanvas" width="280" height="320"></canvas> 
+      <button class="retro-btn" id="shooter-reset-btn">RESTART</button>
+      <button class="retro-btn btn-back" onclick="showSection('menu-section')">&lt; MENU</button>
+    </div>
+  </div>
+
+  <script> 
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+
+      if (sectionId === 'ttt-section') {
+        restartTTT();
+      } else if (sectionId === 'quiz-section') {
+        initQuiz();
+      } else if (sectionId === 'shooter-section') {
+        initShooter();
+      } else {
+        stopShooter();  
+      }
+    }
+ 
+    const cells = document.querySelectorAll('.cell');
+    const tttStatus = document.getElementById('ttt-status');
+    const resetBtn = document.getElementById('resetBtn');
+    
+    const winPatterns = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6]
+    ];
+
+    let tttOptions = ["", "", "", "", "", "", "", "", ""];
+    let currentPlayer = "X";
+    let tttRunning = true;
+
+    cells.forEach(cell => cell.addEventListener('click', cellClicked));
+    resetBtn.addEventListener('click', restartTTT);
+
+    function cellClicked() {
+      const cellIndex = this.getAttribute('data-index');
+      if (tttOptions[cellIndex] !== "" || !tttRunning) return;
+
+      tttOptions[cellIndex] = currentPlayer;
+      this.textContent = currentPlayer;
+      this.classList.add(currentPlayer.toLowerCase());
+      
+      checkTTTWinner();
+    }
+
+    function checkTTTWinner() {
+      let roundWon = false;
+
+      for (let i = 0; i < winPatterns.length; i++) {
+        const [a, b, c] = winPatterns[i];
+        if (tttOptions[a] && tttOptions[a] === tttOptions[b] && tttOptions[a] === tttOptions[c]) {
+          roundWon = true;
+          break;
+        }
+      }
+
+      if (roundWon) {
+        const color = (currentPlayer === "X") ? "var(--k-green)" : "var(--k-blue)";
+        tttStatus.innerHTML = `<span style="color:${color}">${currentPlayer} WINS!</span>`;
+        tttRunning = false;
+      } else if (!tttOptions.includes("")) {
+        tttStatus.innerHTML = `<span>DRAW GAME!</span>`;
+        tttRunning = false;
+      } else {
+        currentPlayer = (currentPlayer === "X") ? "O" : "X";
+        const color = (currentPlayer === "X") ? "var(--k-green)" : "var(--k-blue)";
+        tttStatus.innerHTML = `TURN: <span style="color: ${color};">${currentPlayer}</span>`;
+      }
+    }
+
+    function restartTTT() {
+      currentPlayer = "X";
+      tttOptions = ["", "", "", "", "", "", "", "", ""];
+      tttStatus.innerHTML = `TURN: <span style="color: var(--k-green);">X</span>`;
+      cells.forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove('x', 'o');
+      });
+      tttRunning = true;
+    }
+ 
+    let quizInit = false;
+    let angka1 = 0, angka2 = 0, jawabanBenar = 0, skorStreak = 0, sedangTunggu = false;
+
+    const boxSoal = document.getElementById('box-soal');
+    const containerOpsi = document.getElementById('opsi-container');
+    const feedback = document.getElementById('feedback');
+    const skorEl = document.getElementById('skor');
+
+    function initQuiz() {
+      if (!quizInit) {
+        containerOpsi.addEventListener('click', periksaJawaban);
+        quizInit = true;
+      }
+      skorStreak = 0;
+      skorEl.textContent = skorStreak;
+      feedback.textContent = "";
+      acakSoal();
+    }
+
+    function acakSoal() { 
+      sedangTunggu = false;
+      feedback.textContent = "";
+      
+      let maxAngka = 10;
+      if (skorStreak >= 15) maxAngka = 50;
+      else if (skorStreak >= 10) maxAngka = 35;
+      else if (skorStreak >= 5) maxAngka = 20;
+
+      angka1 = Math.floor(Math.random() * maxAngka) + 1;
+      angka2 = Math.floor(Math.random() * maxAngka) + 1;
+      jawabanBenar = angka1 * angka2;
+      
+      boxSoal.textContent = `${angka1} x ${angka2}`;
+      
+      let opsiArr = [jawabanBenar];
+      while (opsiArr.length < 3) {
+        let offset = (Math.floor(Math.random() * 5) + 1) * (Math.random() < 0.5 ? 1 : -1);
+        let opsiPalsu = jawabanBenar + offset;
+        if (opsiPalsu > 0 && !opsiArr.includes(opsiPalsu)) {
+          opsiArr.push(opsiPalsu);
+        }
+      }
+      
+      opsiArr.sort(() => Math.random() - 0.5);
+
+      const tombols = containerOpsi.querySelectorAll('.btn-opsi');
+      tombols.forEach((btn, idx) => {
+        btn.textContent = opsiArr[idx];
+        btn.dataset.nilai = opsiArr[idx];
+      });
+    }
+
+    function periksaJawaban(e) {
+      if (sedangTunggu || !e.target.classList.contains('btn-opsi')) return;
+      
+      const jawabanUser = parseInt(e.target.dataset.nilai);
+      sedangTunggu = true;
+
+      if (jawabanUser === jawabanBenar) {
+        skorStreak++;
+        feedback.className = "feedback tepat";
+        feedback.textContent = "> CORRECT, +1";
+        skorEl.textContent = skorStreak;
+        setTimeout(acakSoal, 600);  
+      } else {
+        skorStreak = 0;  
+        feedback.className = "feedback salah";
+        feedback.textContent = `> WRONG, RESET`;
+        skorEl.textContent = skorStreak;
+        setTimeout(acakSoal, 1200);
+      }
+    }
+ 
+    const canvas = document.getElementById("shooterCanvas");
+    const ctx = canvas.getContext("2d");
+    const shooterScoreEl = document.getElementById("shooter-score");
+    const shooterResetBtn = document.getElementById("shooter-reset-btn");
+
+    const player = { x: 125, y: 280, w: 30, h: 20 };
+    let bullets = [], enemies = [], shooterScore = 0;
+    let shooterGameOver = false, isShooting = false;
+    let enemyInterval = null, autoFireInterval = null, animFrame = null;
+    let shooterInit = false;
+
+    function initShooter() {
+      if (!shooterInit) { 
+        canvas.addEventListener("mousemove", (e) => { if (isShooting) handleMove(e); });
+        canvas.addEventListener("mousedown", startShooting);
+        window.addEventListener("mouseup", stopShooting);
+
+        canvas.addEventListener("touchmove", (e) => { if (isShooting) handleMove(e); });
+        canvas.addEventListener("touchstart", startShooting);
+        window.addEventListener("touchend", stopShooting);
+
+        shooterResetBtn.addEventListener("click", resetShooter);
+        shooterInit = true;
+      }
+      resetShooter();
+    }
+
+    function resetShooter() {
+      player.x = 125;
+      player.y = 280;
+      bullets = [];
+      enemies = [];
+      shooterScore = 0;
+      shooterScoreEl.textContent = shooterScore;
+      shooterGameOver = false;
+      isShooting = false;
+
+      stopShooterTimers();
+ 
+      enemyInterval = setInterval(() => {
+        if (!shooterGameOver) {
+          enemies.push({
+            x: Math.random() * (canvas.width - 20),
+            y: -20, w: 20, h: 20,
+            speed: 1.5 + Math.random() * 1.5
+          });
+        }
+      }, 800);
+ 
+      autoFireInterval = setInterval(() => {
+        if (!shooterGameOver && isShooting) {
+          bullets.push({
+            x: player.x + player.w / 2 - 2,
+            y: player.y, w: 4, h: 10, speed: 8
+          });
+        }
+      }, 120);
+
+      if (animFrame) cancelAnimationFrame(animFrame);
+      shooterLoop();
+    }
+
+    function handleMove(e) {
+      if (shooterGameOver) return;
+      const rect = canvas.getBoundingClientRect();
+      let clientX = e.clientX;
+      if (e.touches && e.touches.length > 0) clientX = e.touches[0].clientX;
+
+      const mouseX = clientX - rect.left;
+      player.x = mouseX - player.w / 2;
+
+      if (player.x < 0) player.x = 0;
+      if (player.x + player.w > canvas.width) player.x = canvas.width - player.w;
+    }
+
+    function startShooting(e) {
+      if (shooterGameOver) return;
+      isShooting = true;
+      handleMove(e);
+    }
+
+    function stopShooting() {
+      isShooting = false;
+    }
+
+    function updateShooter() {
+      if (shooterGameOver) return;
+ 
+      for (let bIndex = bullets.length - 1; bIndex >= 0; bIndex--) {
+        let b = bullets[bIndex];
+        b.y -= b.speed;
+        if (b.y < 0) bullets.splice(bIndex, 1);
+      }
+ 
+      for (let eIndex = enemies.length - 1; eIndex >= 0; eIndex--) {
+        let e = enemies[eIndex];
+        e.y += e.speed;
+
+        if (e.y + e.h >= canvas.height) {
+          shooterGameOver = true;
+          stopShooterTimers();
+        }
+
+        for (let bIndex = bullets.length - 1; bIndex >= 0; bIndex--) {
+          let b = bullets[bIndex];
+          if (
+            b.x < e.x + e.w && b.x + b.w > e.x &&
+            b.y < e.y + e.h && b.y + b.h > e.y
+          ) {
+            enemies.splice(eIndex, 1);
+            bullets.splice(bIndex, 1);
+            shooterScore += 10;
+            shooterScoreEl.textContent = shooterScore;
+            break;
+          }
+        }
+      }
+    }
+
+    function drawShooter() {
+      ctx.fillStyle = "#111";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Player
+      ctx.fillStyle = "#00ff66";
+      ctx.fillRect(player.x, player.y, player.w, player.h);
+
+      // Peluru
+      ctx.fillStyle = "#00e5ff";
+      bullets.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+
+      // Musuh
+      ctx.fillStyle = "#ff3333";
+      //enemies.forEach(e => ctx.roundRect(e.x, e.y, e.w, e.h, 50)); 
+    	enemies.forEach(e => {
+      		ctx.beginPath();
+      		ctx.roundRect(e.x, e.y, e.w, e.h, 50); 
+      		ctx.fill();
+    	});
+
+      if (shooterGameOver) {
+        ctx.fillStyle = "#ff3333";
+        ctx.font = "10px 'Press Start 2P'";
+        ctx.fillText("GAME OVER!", 70, 160);
+      }
+    }
+
+    function shooterLoop() {
+      updateShooter();
+      drawShooter();
+      if (!shooterGameOver) {
+        animFrame = requestAnimationFrame(shooterLoop);
+      }
+    }
+
+    function stopShooterTimers() {
+      if (enemyInterval) clearInterval(enemyInterval);
+      if (autoFireInterval) clearInterval(autoFireInterval);
+    }
+
+    function stopShooter() {
+      shooterGameOver = true;
+      isShooting = false;
+      stopShooterTimers();
+      if (animFrame) cancelAnimationFrame(animFrame);
+    }
+  </script>
+</body>
+</html>

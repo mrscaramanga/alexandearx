@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sudoku by Alexandearx</title>
+  <link rel="icon" type="image/x-icon" href="https://ugc.production.linktr.ee/cc7ac80e-b4f4-43ca-a32b-b40673231b1a_cold....png?io=true&size=avatar-v3_0">
+  <style>
+    :root {
+      --bg: #030a05; 
+      --card: #010502; 
+      --accent: #00ff66; 
+      --muted: #005511;
+      --cell-bg: #000000;
+      --correct: #00ff66; 
+      --wrong: #ff3333; 
+      --given: #88ffaa;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      margin: 0;
+      background: #000000;
+      color: #e6eef8;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;  
+      padding: 12px 12px 24px 12px;
+    } 
+
+    .app {
+      width: 100%;
+      max-width: 480px;  
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      gap: 6px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center; 
+      justify-content: space-between;
+      width: 100%;
+      background: var(--card);
+      padding: 8px 12px; 
+      border: 1px solid rgba(0, 255, 102, 0.2);
+    }
+
+    #timer {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    button {
+      background: var(--card);
+      border: 1px solid rgba(0, 255, 102, 0.3);
+      color: var(--accent);
+      padding: 8px 12px; 
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    button:hover {
+      background-color: var(--accent);
+      color: #000000;
+    }
+
+    .status {
+      color: var(--accent);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .board {
+      width: 100%;
+      background: var(--card); 
+      box-shadow: 0 6px 20px rgba(0, 255, 102, 0.05);
+      border: 2px solid rgba(0, 255, 102, 0.4);
+    }
+ 
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: repeat(9, 1fr);
+      gap: 2px;
+      width: 100%;
+      aspect-ratio: 1 / 1;  
+    }
+
+    .cell {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cell-bg); 
+      font-weight: 600;
+      font-size: clamp(14px, 5cqw, 22px);  
+      cursor: pointer;
+      color: #cfeefe;
+      border: 1px solid rgba(0, 255, 102, 0.15);
+    }
+
+    .cell.given {
+      color: var(--given);
+      font-weight: 700;
+    }
+
+    .cell input {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: center;
+      font-weight: 700;
+      font-size: inherit;
+    }
+
+    .cell input:focus {
+      outline: none;
+      caret-color: transparent;
+    }
+
+    .cell.border-right {
+      border-right: 2px solid rgba(0, 255, 102, 0.4);
+    }
+
+    .cell.border-bottom {
+      border-bottom: 2px solid rgba(0, 255, 102, 0.4);
+    }
+
+    .cell.wrong {
+      background: rgba(255, 51, 51, 0.25);
+    }
+ 
+    .numpad-container {
+      width: 100%;
+      margin-top: 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .numpad {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 4px;
+      width: 100%;
+    }
+
+    .num {
+      background: var(--card);
+      border: 1px solid rgba(0, 255, 102, 0.3);
+      padding: 10px 0; 
+      cursor: pointer;
+      font-size: clamp(13px, 4cqw, 16px);
+      color: var(--accent);
+      text-align: center;
+    }
+
+    .num.num-active {
+      background-color: var(--accent);
+      color: #000000;
+      font-weight: bold;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .actions button {
+      flex: 1;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header> 
+      <div class="top-bar">
+        <div id="timer">00:00</div>
+        <div class="status" id="status">Ready</div>
+      </div>
+    </header>
+
+    <div class="board">
+      <div id="grid" class="grid" aria-label="sudoku grid"></div>
+    </div>
+
+    <div class="numpad-container">
+      <div class="numpad" id="numpad"></div>
+      <div class="actions">
+        <button id="eraseBtn">Clear</button> 
+        <button id="newBtn">Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function makeEmptyBoard() {
+      return Array.from({ length: 9 }, () => Array(9).fill(0));
+    }
+
+    function copyBoard(b) {
+      return b.map(r => r.slice());
+    }
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function isSafe(board, row, col, num) {
+      for (let i = 0; i < 9; i++) {
+        if (board[row][i] === num || board[i][col] === num) return false;
+      }
+      const sr = Math.floor(row / 3) * 3;
+      const sc = Math.floor(col / 3) * 3;
+      for (let r = sr; r < sr + 3; r++) {
+        for (let c = sc; c < sc + 3; c++) {
+          if (board[r][c] === num) return false;
+        }
+      }
+      return true;
+    }
+
+    function generateComplete() {
+      const board = makeEmptyBoard();
+      const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      function fillCell(r, c) {
+        if (r === 9) return true;
+        const nr = c === 8 ? r + 1 : r;
+        const nc = c === 8 ? 0 : c + 1;
+        const shuffled = shuffle(nums.slice());
+        for (const n of shuffled) {
+          if (isSafe(board, r, c, n)) {
+            board[r][c] = n;
+            if (fillCell(nr, nc)) return true;
+            board[r][c] = 0;
+          }
+        }
+        return false;
+      }
+      fillCell(0, 0);
+      return board;
+    }
+
+    function removeCells(board, removals) {
+      const b = copyBoard(board);
+      const positions = [];
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          positions.push([r, c]);
+        }
+      }
+      shuffle(positions);
+      let removed = 0;
+      for (const [r, c] of positions) {
+        const backup = b[r][c];
+        b[r][c] = 0;
+        const count = countSolutions(copyBoard(b), 2);
+        if (count === 1) {
+          removed++;
+        } else {
+          b[r][c] = backup;
+        }
+        if (removed >= removals) break;
+      }
+      return b;
+    }
+
+    function countSolutions(board, limit) {
+      let solutions = 0;
+      function helper() {
+        if (solutions >= limit) return;
+        for (let r = 0; r < 9; r++) {
+          for (let c = 0; c < 9; c++) {
+            if (board[r][c] === 0) {
+              for (let n = 1; n <= 9; n++) {
+                if (isSafe(board, r, c, n)) {
+                  board[r][c] = n;
+                  helper();
+                  board[r][c] = 0;
+                }
+              }
+              return;
+            }
+          }
+        }
+        solutions++;
+      }
+      helper();
+      return solutions;
+    }
+
+    const gridEl = document.getElementById('grid');
+    const newBtn = document.getElementById('newBtn');
+    const eraseBtn = document.getElementById('eraseBtn');
+    const statusEl = document.getElementById('status');
+    const numpad = document.getElementById('numpad');
+    const timerEl = document.getElementById('timer');
+
+    let solutionBoard = null;
+    let puzzleBoard = null;
+    let given = null;
+    let selected = null;
+
+    let timerInterval = null;
+    let startTime = null;
+    let elapsedBefore = 0;
+    let running = false;
+    let activeNumpadValue = 0;
+
+    function startTimer() {
+      if (running) return;
+      running = true;
+      startTime = Date.now();
+      timerInterval = setInterval(() => {
+        const diff = Date.now() - startTime + elapsedBefore;
+        timerEl.textContent = formatTime(diff);
+      }, 250);
+    }
+
+    function stopTimer() {
+      if (!running) return;
+      running = false;
+      elapsedBefore = Date.now() - startTime + elapsedBefore;
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      startTime = null;
+      elapsedBefore = 0;
+      running = false;
+      timerEl.textContent = '00:00';
+    }
+
+    function formatTime(ms) {
+      const total = Math.floor(ms / 1000);
+      const m = Math.floor(total / 60).toString().padStart(2, '0');
+      const s = (total % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function buildGrid() {
+      unlockBoard();
+      resetTimer();
+      startTimer();
+      gridEl.innerHTML = '';
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          if ((c + 1) % 3 === 0 && c !== 8) cell.classList.add('border-right');
+          if ((r + 1) % 3 === 0 && r !== 8) cell.classList.add('border-bottom');
+
+          cell.dataset.r = r;
+          cell.dataset.c = c;
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.maxLength = 1;
+          input.inputMode = 'numeric';
+          input.autocomplete = 'off';
+          input.readOnly = true;
+          input.addEventListener('focus', () => { selected = cell; });
+          input.addEventListener('input', (e) => onInput(e, cell));
+          cell.appendChild(input);
+
+          cell.addEventListener('click', () => {
+            const r = +cell.dataset.r;
+            const c = +cell.dataset.c;
+            if (activeNumpadValue !== 0 && !given[r][c]) {
+              selected = cell;
+              fillNumber(activeNumpadValue);
+            }
+            input.focus();
+          });
+          gridEl.appendChild(cell);
+        }
+      }
+
+      numpad.innerHTML = '';
+      for (let i = 1; i <= 9; i++) {
+        const b = document.createElement('button');
+        b.className = 'num';
+        b.textContent = i;
+        b.addEventListener('click', () => {
+          highlightNumpadButton(i);
+          activeNumpadValue = i;
+          if (selected) {
+            selected.querySelector('input').blur();
+          }
+        });
+        numpad.appendChild(b);
+      }
+    }
+
+    function highlightNumpadButton(value) {
+      document.querySelectorAll('.num').forEach(b => b.classList.remove('num-active'));
+      if (value > 0) {
+        document.querySelector(`#numpad button:nth-child(${value})`)?.classList.add('num-active');
+      }
+    }
+
+    function onInput(e, cell) {
+      const val = e.target.value.replace(/[^1-9]/g, '');
+      e.target.value = val;
+      const r = +cell.dataset.r;
+      const c = +cell.dataset.c;
+
+      if (val === '') {
+        puzzleBoard[r][c] = 0;
+        cell.classList.remove('wrong');
+      } else {
+        puzzleBoard[r][c] = Number(val);
+        if (solutionBoard && solutionBoard[r][c] !== puzzleBoard[r][c]) {
+          cell.classList.add('wrong');
+        } else {
+          cell.classList.remove('wrong');
+        }
+      }
+      updateStatus();
+    }
+
+    function fillNumber(n) {
+      if (!selected) return;
+      const input = selected.querySelector('input');
+      if (given[+selected.dataset.r][+selected.dataset.c]) return;
+      input.value = String(n);
+      input.dispatchEvent(new Event('input'));
+    }
+
+    function eraseCell() {
+      if (!selected) return;
+      const input = selected.querySelector('input');
+      if (given[+selected.dataset.r][+selected.dataset.c]) return;
+      input.value = '';
+      input.dispatchEvent(new Event('input'));
+    }
+
+    function render(board, givens) {
+      const cells = document.querySelectorAll('.cell');
+      cells.forEach(cell => {
+        const r = +cell.dataset.r;
+        const c = +cell.dataset.c;
+        const inp = cell.querySelector('input');
+        const v = board[r][c];
+
+        inp.value = v === 0 ? '' : String(v);
+        if (givens && givens[r][c]) {
+          cell.classList.add('given');
+          inp.disabled = true;
+        } else {
+          cell.classList.remove('given');
+          inp.disabled = false;
+        }
+        cell.classList.remove('wrong');
+      });
+    }
+
+    function lockBoard() {
+      document.querySelectorAll('.cell').forEach(cell => { cell.querySelector('input').disabled = true; });
+      document.querySelectorAll('.num').forEach(b => b.disabled = true);
+      eraseBtn.disabled = true;
+    }
+
+    function unlockBoard() {
+      document.querySelectorAll('.cell').forEach(cell => {
+        const r = +cell.dataset.r;
+        const c = +cell.dataset.c;
+        const inp = cell.querySelector('input');
+        inp.disabled = given ? given[r][c] : false;
+      });
+    }
+
+    function updateStatus() {
+      let filled = true;
+      let wrong = false;
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          const val = puzzleBoard[r][c];
+          if (val === 0) filled = false;
+          if (solutionBoard && val !== 0 && solutionBoard[r][c] !== val) wrong = true;
+        }
+      }
+
+      if (filled && !wrong) {
+        statusEl.textContent = 'Game Over!';
+        stopTimer();
+        lockBoard();
+      } else if (wrong) {
+        statusEl.textContent = 'You have misplaced your soul';
+      } else {
+        statusEl.textContent = 'Keep going...';
+      }
+    }
+
+    function newPuzzle(removals = 46) {
+      resetTimer();
+      startTimer();
+      activeNumpadValue = 0;
+      highlightNumpadButton(0);
+      document.querySelectorAll('.num').forEach(b => b.disabled = false);
+      eraseBtn.disabled = false;
+      statusEl.textContent = 'Generating...';
+
+      setTimeout(() => {
+        const complete = generateComplete();
+        solutionBoard = copyBoard(complete);
+        const puzzle = removeCells(complete, removals);
+        puzzleBoard = copyBoard(puzzle);
+        given = puzzle.map(r => r.map(v => v !== 0));
+        render(puzzleBoard, given);
+        updateStatus();
+      }, 50);
+    }
+
+    buildGrid();
+    newBtn.addEventListener('click', () => newPuzzle());
+    eraseBtn.addEventListener('click', () => eraseCell());
+
+    document.addEventListener('keydown', (e) => {
+      if (!selected) return;
+      if (e.key === 'Backspace' || e.key === 'Delete') eraseCell();
+      if (e.key === 'ArrowRight') moveSelection(0, 1);
+      if (e.key === 'ArrowLeft') moveSelection(0, -1);
+      if (e.key === 'ArrowUp') moveSelection(-1, 0);
+      if (e.key === 'ArrowDown') moveSelection(1, 0);
+    });
+
+    function moveSelection(dr, dc) {
+      if (!selected) return;
+      let r = +selected.dataset.r;
+      let c = +selected.dataset.c;
+      r = (r + dr + 9) % 9;
+      c = (c + dc + 9) % 9;
+      const idx = r * 9 + c;
+      const cell = document.querySelectorAll('.cell')[idx];
+      const input = cell.querySelector('input');
+      input.focus();
+    }
+    newPuzzle();
+  </script>
+</body>
+</html>

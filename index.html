@@ -269,11 +269,10 @@
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-
             document.getElementById(tabName + '-tab').classList.add('active');
             event.currentTarget.classList.add('active');
         }
-	document.querySelectorAll('.read-body').forEach(body => {
+		document.querySelectorAll('.read-body').forEach(body => {
             body.addEventListener('click', function() {
                 this.parentElement.removeAttribute('open');
             });

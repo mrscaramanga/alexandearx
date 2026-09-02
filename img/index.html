@@ -16,44 +16,45 @@
         }
 
         body {
-            background-color: #0B132B;
+            background-color: black;/*#0B132B;*/
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start; 
+  	    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
             padding: 40px 20px 60px 20px;  
         }
 
-        .container {
+        .container { 
             width: 100%;
             max-width: 480px;
             text-align: center;
         }
 
         .profile-img {
-            width: 96px;
-            height: 96px;
+            width: 86px;
+            height: 86px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 16px; 
+            margin-bottom: 10px; 
         }
 
         h2 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             margin-bottom: 2px;
         }
 
         h1 {
             font-family: monospace;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;    
-            color: #FFDB58;    
+	    color: #C084FC;  
             margin-bottom: 6px;
         }
 
         p {
-            color: #94a3b8;
+            color: #A0A0A0;/*#94a3b8;*/
             font-size: 0.9rem;
             margin-bottom: 20px;
         }
@@ -79,9 +80,10 @@
             transition: all 0.2s ease;
         }
 
-        .tab-btn.active, .tab-btn:hover {
-            color: #0f172a;
-            background-color: #FFDB58;
+        .tab-btn.active, .tab-btn:hover { 
+  	    background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(168, 85, 247, 0.4));
+  	    border-color: rgba(168, 85, 247, 0.6);
+  	    color: #ffffff;
         }
 
         .tab-content {
@@ -111,7 +113,7 @@
             gap: 20px;
             width: 100%;
             padding: 14px 20px;
-            background-color: #1e293b;
+            /*background-color: #1e293b;*/
             color: #f8fafc;
             text-decoration: none;  
             font-weight: 400;
@@ -128,9 +130,12 @@
         }
 
         .link-btn:hover {
-            background-color: #FFDB58;
-            color: #0f172a; 
+            /*background-color: #FDE047;#FFDB58; 
+            color: #0f172a; */
             transform: translateY(-2px);
+		    background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(168, 85, 247, 0.4));
+	  	    border-color: rgba(168, 85, 247, 0.6);
+	  	    color: #ffffff;
         }
  
         .read-list {
@@ -141,7 +146,7 @@
         }
 
         details {
-            background-color: #1e293b;
+            /*background-color: #1e293b;*/
             border: 1px solid #334155;
             border-radius: 5px;
             overflow: hidden;
@@ -177,7 +182,8 @@
 
         details[open] summary {
             border-bottom: 1px solid #334155;
-            color: #FFDB58;
+	    	color: #C084FC;  
+            /*color: #FFDB58;*/
         }
 
         .read-body {
@@ -189,11 +195,11 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://ugc.production.linktr.ee/c257841a-31e8-489f-90ad-7d2437a583b3_yellow-flower-by-alexandearx.jpeg?io=true&size=avatar-v3_0" alt="Profile" class="profile-img">
+    <div class="container"> 
+        <img src="rbyalexandearx1.png" alt="Profile" class="profile-img">
         <h2>R Al Fath</h2>
         <h1>Alexandearx | Wangsa Guna</h1>
-        <p>Increase me in knowledge</p>      
+        <p style="color: #94a3b8;">Increase me in knowledge</p>      
         <p>I'm not even a speck of dust in this whole wide universe. Hope you find what you're looking for here. Good luck ~</p>      
         <div class="tab-nav">
             <button class="tab-btn active" onclick="switchTab('links')"><i class="fa-solid fa-link"></i> Links</button>

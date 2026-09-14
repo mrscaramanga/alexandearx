@@ -12,21 +12,28 @@
             box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        body {
-            background-color: black;/*#0B132B;*/
+        body {  
+			background-image: 
+				linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)),
+				url('https://images.unsplash.com/photo-1523855043329-725c08ea99bd?q=80&w=870&auto=format&fit=crop');
+			background-attachment: fixed;  
+			background-repeat: no-repeat;  
+			background-position: center;    
+			background-size: cover;   
+			backdrop-filter: blur(4px); 
+			background-color: black;
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start; 
-  	   		box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            align-items: flex-start;  
             padding: 40px 20px 60px 20px;  
         }
 
         .container { 
             width: 100%;
-            max-width: 480px;
-            text-align: center;
+            max-width: 640px;
+            text-align: center;   
         }
 
         .profile-img {
@@ -56,6 +63,13 @@
             margin-bottom: 20px;
         }
  
+		.meta-row { 
+            align-items: center;
+            width: 100%; 
+            margin-top: 25px; 
+			padding-top: 10px;
+            border-top: 1px solid #1e293b;
+        } 
         .tab-nav {
             display: flex;
             justify-content: center;
@@ -85,6 +99,7 @@
 
         .tab-content {
             display: none;
+			
         }
 
         .tab-content.active {
@@ -118,6 +133,9 @@
             border-radius: 5px;
             border: 1px solid #334155;
             transition: all 0.2s ease;
+			backdrop-filter: blur(56px);
+			box-shadow: 0 10px 40px rgba(255, 255, 255, 0.05);
+			-webkit-backdrop-filter: blur(16px);
         }
 
         .link-btn i {
@@ -147,7 +165,10 @@
             border: 1px solid #334155;
             border-radius: 5px;
             overflow: hidden;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease;background: rgba(0, 0, 0, 0.5);
+			backdrop-filter: blur(56px);
+			box-shadow: 0 10px 40px rgba(255, 255, 255, 0.05);
+			-webkit-backdrop-filter: blur(16px);
         }
 
         summary {
@@ -198,15 +219,17 @@
         <h1>Alexandearx | Wangsa Guna</h1>
         <p style="color: #94a3b8;">Increase me in knowledge</p>      
         <p>I'm not even a speck of dust in this whole wide universe. Hope you find what you're looking for here. Good luck ~</p>      
-        <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab('links')"><i class="fa-solid fa-link"></i> Links</button>
-            <button class="tab-btn" onclick="switchTab('read')"><i class="fa-solid fa-book-open"></i> Read</button>
-        </div>
+        <div class="meta-row">
+			<div class="tab-nav">
+				<button class="tab-btn active" onclick="switchTab('links')"><i class="fa-solid fa-link"></i> Links</button>
+				<button class="tab-btn" onclick="switchTab('read')"><i class="fa-solid fa-book-open"></i> Read</button>
+			</div>
+		</div>
         <div id="links-tab" class="tab-content active">
             <div class="links">
                 <a href="http://filewangsaguna.blogspot.com/" target="_blank" class="link-btn"><i class="fa-brands fa-blogger"></i> Pengelana Misteri</a>
                 <a href="https://mysteriousfile88.wordpress.com/" target="_blank" class="link-btn"><i class="fa-brands fa-wordpress"></i> Mysterious File 88</a>
-                <a href="https://linktr.ee/wangsaguna" target="_blank" class="link-btn"><i class="fa-solid fa-link"></i> Temp Link</a>
+                <a href="https://linktr.ee/wangsaguna" target="_blank" class="link-btn"><i class="fa-solid fa-link"></i> Temp Linktree</a>
                 <a href="game.html" target="_blank" class="link-btn"><i class="fa-brands fa-space-awesome"></i></i> Play Games</a>
                 <a href="https://t.me/alexandearx" target="_blank" class="link-btn"><i class="fa-brands fa-telegram"></i> Telegram</a>
 				<a href="https://open.spotify.com/user/pm3cpwdic6c2s3thp46g288ik?si=ce98b1cbe8b54f54" target="_blank" class="link-btn"><i class="fa-brands fa-spotify"></i> Spotify</a>
@@ -217,15 +240,21 @@
                 <details>
                     <summary>What motivates you?</summary>
                     <div class="read-body">
-                        <p>The motivation can be very abstract (the “need” to go sailing on a warm and breezy summer afternoon), but it can also be quite concrete (the need to go to the bathroom when your bladder is full). Motivation can be thought of as a driving force on behavior. Motivated behavior is a behavior that is incited to achieve a goal.<br><br>Dopamine plays a key role in motivation by acting as a chemical messenger in the brain that influences reward-seeking behavior. When you anticipate a reward or achieve a goal, dopamine levels increase, which reinforces the behavior and encourages you to pursue similar goals in the future. It’s not just about pleasure, dopamine is more about driving you to take action and stay motivated, especially when it comes to pursuing goals or tasks that lead to positive outcomes. In essence, dopamine helps to maintain focus and effort, even when challenges arise.<br><br>The hypothalamus also plays a key role in motivating animals to find food, drink, and sex in response to their needs.<br><br>You are cold, dehydrated, and depleted of energy. The appropriate humoral and visceromotor responses kick in automatically. You shiver, blood is shunted away from the body surface, urine production is inhibited, body fat reserves are mobilized, and so on. But the fastest and most effective way to correct these disturbances of brain homeostasis is to actively seek or generate warmth by moving, to drink water, and to eat. These are examples of motivated behaviors generated by the somatic motor system, and they are incited to occur by the activity of the lateral hypothalamus.<br><br>From: Neuroscience Exploring The Brain&nbsp;</p>
+                        <p>The motivation can be very abstract (the “need” to go sailing on a warm and breezy summer afternoon), but it can also be quite concrete (the need to go to the bathroom when your bladder is full). Motivation can be thought of as a driving force on behavior. Motivated behavior is a behavior that is incited to achieve a goal.</p><p>Dopamine plays a key role in motivation by acting as a chemical messenger in the brain that influences reward-seeking behavior. When you anticipate a reward or achieve a goal, dopamine levels increase, which reinforces the behavior and encourages you to pursue similar goals in the future. It’s not just about pleasure, dopamine is more about driving you to take action and stay motivated, especially when it comes to pursuing goals or tasks that lead to positive outcomes. In essence, dopamine helps to maintain focus and effort, even when challenges arise.</p><p>The hypothalamus also plays a key role in motivating animals to find food, drink, and sex in response to their needs.</p><p>You are cold, dehydrated, and depleted of energy. The appropriate humoral and visceromotor responses kick in automatically. You shiver, blood is shunted away from the body surface, urine production is inhibited, body fat reserves are mobilized, and so on. But the fastest and most effective way to correct these disturbances of brain homeostasis is to actively seek or generate warmth by moving, to drink water, and to eat. These are examples of motivated behaviors generated by the somatic motor system, and they are incited to occur by the activity of the lateral hypothalamus.</p><p>From: Neuroscience Exploring The Brain</p>
                     </div>
                 </details>
                 <details>
                     <summary>Avicenna's Wisdom on Health and Malady</summary>
                     <div class="read-body">
-                        <p>My favorite one from a book: <strong>Avicenna</strong>.<br><br><strong>Avicenna (Ibn Sina)</strong>. Born at the end of the tenth century in what is now modern day Uzbekistan, Avicenna became a profound influence not only on Islamic thinking but also on that of Jews (such as Maimonides) and Christians (such as Thomas Aquinas). If a great thinker is one whose thought can be assimilated and developed by people of very different intellectual traditions, then Avicenna was, without doubt, <strong>a great thinker</strong>.<br><br><em>Ex nihilo nihilo fit</em>. <strong>Nothing comes from nothing</strong>, and Avicenna and his philosophy are no exception. Indeed, multiple influences were at work in the formation of his thought. This phrase is often associated with ancient Greek philosopher <strong>Parmenides</strong>. Parmenides argued that something cannot come from nothing and that change is an illusion, emphasizing the idea that existence is continuous and unchanging. This concept was also discussed by later philosophers, including <strong>Aristotle</strong>, who examined it in the context of his own metaphysical theories, although he did not use the exact phrase. <br><br>Avicenna demonstrated remarkable intellectual abilities from a very young age. By the age of 10, he had memorized the Qur'an and was already studying various subjects, including grammar, literature, and logic. He received his early <strong>education </strong>from his father and local teachers, who provided him with a strong foundation in various disciplines. Avicenna’s keen interest in medicine became evident early on, and by the age of 16, he was proficient enough to practice medicine and treat patients. His early exposure to Greek philosophical texts, particularly those of Aristotle, played a crucial role in shaping his future contributions to philosophy and science. His extensive studies and rapid mastery of diverse fields laid the groundwork for his later influential works, including the "Canon of Medicine" and "The Book of Healing."<br><br><strong>In this post</strong>, I want to note his insight on health and malady from page 237-238. Avicenna concludes his general comments on the causes of health and malady by identifying the six most important ones that the patient should consider in preserving his or her health, or the physician must take into account in returning the patient to a state of health. These are:<br>1) the ambient air,<br>2) the food and drink one takes in,<br>3) proper physical activity and rest,<br>4) psychological activities,<br>5) getting enough sleep as well as not sleeping too much, and finally<br>6) evacuation and retention.<br><br>These last six factors are what later Galenists would term the “non naturals,” all of which affect a human’s temperament by moderating or altering in some way the primary qualities of hot, cold, wet, and dry. Thus, when one breathes in air, it cools the humors in the heart, and consequently, if the ambient air is excessively cold or hot, it may reduce the natural hot quality of the vital spirits too much or not enough. Moreover, the air might be excessively moist and dry, thus affecting one’s temperamental balance.<br><br><strong>Physical activity</strong> or resting from physical activity clearly increases the vital heat that is the hallmark of life, but, ironically, this same vital heat breaks down the body and ultimately leads to its corruption, making an adequate amount of rest, which ultimately cools the body, also necessary. Sleep and wakefulness, which closely resemble rest and physical activity, also affect the body’s level of hot or cold: sleep cooling the body, wakefulness heating it.<br><br><strong>Psychological activity</strong> can also influence one’s temperament, argues Avicenna, particularly when the psychological activity involves remembering some past incidence or imaging some future one, especially when these mental images precipitate some emotional state. Thus, one might remember some particularly embarrassing or acrimonious event in one’s life and feel flushed or hot under the collar, or imagine some frightening scenario such that one’s “blood runs cold.”<br><br><strong>Food and drink</strong>, Avicenna observes, might have some initial effect when they are first taken in while having an opposite (or at least a different) effect once fully digested. So, for example, wine, in as much as it is a liquid, initially cools one who drinks it, but once it becomes digested it actually heats the blood, at least according the pharmacological theory at Avicenna’s time. Finally, proper retention followed by evacuation ensures that food and drugs that are ingested remain in the body long enough to be fully and properly digested so that the aliment can perform its function as well as seeing that waste material does not adversely affect the flow of the humors and functioning of the organs.<br><br><strong>In general</strong>, today we do not recognize the underlying causal explanations that ancient and medieval physicians associated with the various necessary factors or causes of health and disease. Despite that, one can still appreciate the overall goal (and frequently the efficacy) of these factors or causes in maintaining health. Indeed, living in a healthy climate, getting proper amounts of sleep, accompanied by a regimen of exercise and a well-balanced diet, as well as positive thinking and the like, are considered even today some of the most important factors in a healthy and well-balanced life.</p>
+                        <p>My favorite one from a book: <strong>Avicenna</strong>.</p><p><strong>Avicenna (Ibn Sina)</strong>. Born at the end of the tenth century in what is now modern day Uzbekistan, Avicenna became a profound influence not only on Islamic thinking but also on that of Jews (such as Maimonides) and Christians (such as Thomas Aquinas). If a great thinker is one whose thought can be assimilated and developed by people of very different intellectual traditions, then Avicenna was, without doubt, <strong>a great thinker</strong>.</p><p><em>Ex nihilo nihilo fit</em>. <strong>Nothing comes from nothing</strong>, and Avicenna and his philosophy are no exception. Indeed, multiple influences were at work in the formation of his thought. This phrase is often associated with ancient Greek philosopher <strong>Parmenides</strong>. Parmenides argued that something cannot come from nothing and that change is an illusion, emphasizing the idea that existence is continuous and unchanging. This concept was also discussed by later philosophers, including <strong>Aristotle</strong>, who examined it in the context of his own metaphysical theories, although he did not use the exact phrase.</p><p>Avicenna demonstrated remarkable intellectual abilities from a very young age. By the age of 10, he had memorized the Qur'an and was already studying various subjects, including grammar, literature, and logic. He received his early <strong>education </strong>from his father and local teachers, who provided him with a strong foundation in various disciplines. Avicenna’s keen interest in medicine became evident early on, and by the age of 16, he was proficient enough to practice medicine and treat patients. His early exposure to Greek philosophical texts, particularly those of Aristotle, played a crucial role in shaping his future contributions to philosophy and science. His extensive studies and rapid mastery of diverse fields laid the groundwork for his later influential works, including the "Canon of Medicine" and "The Book of Healing."</p><p><strong>In this post</strong>, I want to note his insight on health and malady from page 237-238. Avicenna concludes his general comments on the causes of health and malady by identifying the six most important ones that the patient should consider in preserving his or her health, or the physician must take into account in returning the patient to a state of health. These are:<br>1) the ambient air,<br>2) the food and drink one takes in,<br>3) proper physical activity and rest,<br>4) psychological activities,<br>5) getting enough sleep as well as not sleeping too much, and finally<br>6) evacuation and retention.<br><br>These last six factors are what later Galenists would term the “non naturals,” all of which affect a human’s temperament by moderating or altering in some way the primary qualities of hot, cold, wet, and dry. Thus, when one breathes in air, it cools the humors in the heart, and consequently, if the ambient air is excessively cold or hot, it may reduce the natural hot quality of the vital spirits too much or not enough. Moreover, the air might be excessively moist and dry, thus affecting one’s temperamental balance.</p><p><strong>Physical activity</strong> or resting from physical activity clearly increases the vital heat that is the hallmark of life, but, ironically, this same vital heat breaks down the body and ultimately leads to its corruption, making an adequate amount of rest, which ultimately cools the body, also necessary. Sleep and wakefulness, which closely resemble rest and physical activity, also affect the body’s level of hot or cold: sleep cooling the body, wakefulness heating it.</p><p><strong>Psychological activity</strong> can also influence one’s temperament, argues Avicenna, particularly when the psychological activity involves remembering some past incidence or imaging some future one, especially when these mental images precipitate some emotional state. Thus, one might remember some particularly embarrassing or acrimonious event in one’s life and feel flushed or hot under the collar, or imagine some frightening scenario such that one’s “blood runs cold.”</p><p><strong>Food and drink</strong>, Avicenna observes, might have some initial effect when they are first taken in while having an opposite (or at least a different) effect once fully digested. So, for example, wine, in as much as it is a liquid, initially cools one who drinks it, but once it becomes digested it actually heats the blood, at least according the pharmacological theory at Avicenna’s time. Finally, proper retention followed by evacuation ensures that food and drugs that are ingested remain in the body long enough to be fully and properly digested so that the aliment can perform its function as well as seeing that waste material does not adversely affect the flow of the humors and functioning of the organs.</p><p><strong>In general</strong>, today we do not recognize the underlying causal explanations that ancient and medieval physicians associated with the various necessary factors or causes of health and disease. Despite that, one can still appreciate the overall goal (and frequently the efficacy) of these factors or causes in maintaining health. Indeed, living in a healthy climate, getting proper amounts of sleep, accompanied by a regimen of exercise and a well-balanced diet, as well as positive thinking and the like, are considered even today some of the most important factors in a healthy and well-balanced life.</p>
                     </div>
                 </details>
+				<details>
+					<summary>Rumi The Poet</summary>
+					<div class="read-body">
+						<p>Jalaluddin Muhammad Rumi (1207–1273) was a Persian poet, scholar, and Sufi mystic. He lived in what is now Afghanistan and later in Konya (Turkey). Rumi is one of the world’s most famous poets because his writings touch the soul. He wrote about love, longing, grief, healing, and the connection between the human heart and the Divine.</p><p>His major work, the Masnawi, is often called "the Quran in Persian" by Sufis because of its deep spiritual wisdom. Rumi believed one thing strongly: the heart is the compass leading us back to God.</p><p>Quotes by Rumi:<br><em>“What you seek is seeking you.”</em><br><em>“The wound is the place where the light enters you.”</em><br><em>“Raise your words, not your voice. It is rain that grows flowers, not thunder.”</em><br><em>“You are not a drop in the ocean. You are the entire ocean in a drop.”</em><br><em>“When you let go of who you are, you become who you might be.”</em></p>
+					</div>
+				</details>
                 <details>
                     <summary>A Decade in Mystery</summary>
                     <div class="read-body"> 
@@ -236,15 +265,6 @@
 						<p>And stay close to my faith<br>For it has erased all my doubts<br>And cradled my heart in grace<br>I am finally home</p>
 					</div>
                 </details>
-				<details>
-					<summary>Promises In The Mist</summary>
-					<div class="read-body">
-						<p>In my restless dreams, I see that town,<br>Where heavy fog comes drifting down.<br>A phantom memory, wrapped in gray,<br>That calls my name from far away.<br></p>
-						<p>You promised you’d take me there again,<br>To quiet streets and soft, white rain.<br>Yet all that remains is the silent chill,<br>And the haunting mist of Silent Hill.<br></p>
-						<p>The rust on the iron, the shadows that creep,<br>Are secrets the quiet town longs to keep.<br>I walk through the ash where the light cannot bloom,<br>Finding a solace within the deep gloom.<br></p>
-						<p>No longer afraid of the dark or the cold,<br>I surrender to stories that shouldn't be told.<br>For in this still void, where the dead echoes lie,<br>The silence is sweet, and the world passes by.<br></p>
-					</div>
-				</details>
                 <details>
                     <summary>Endless Hours Between Earth and Stars</summary>
                     <div class="read-body"> 

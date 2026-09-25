@@ -4,6 +4,8 @@ Website profil publik minimalis untuk menampilkan profil, kumpulan tautan dan tu
 
 🌐 **Live Demo:** https://mrscaramanga.github.io/alexandearx/
 
+[![Trakteer](https://img.shields.io/badge/Trakteer-Support%20Me-red?style=for-the-badge&logo=trakteer)](https://trakteer.id/ghostya)
+
 ---
 
 ## Fitur
